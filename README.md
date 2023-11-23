@@ -8,9 +8,9 @@ _Magnetic Skyrmions are stable soliton-like solutions to dynamical-Landau-Lifshi
 
 ![Capture](https://github.com/RomainClaveau/Skyrmions/assets/122173845/25067058-4626-450c-8d5f-97649a6c0ee2)
 
-- Report: [report.pdf (in french)](https://github.com/RomainClaveau/Skyrmions/report.pdf)
+- Report: [report.pdf (in french)](https://github.com/RomainClaveau/Skyrmions/blob/main/report.pdf)
 
-- Slides: [slides.pdf (in french)](https://github.com/RomainClaveau/Skyrmions/slides.pdf)
+- Slides: [slides.pdf (in french)](https://github.com/RomainClaveau/Skyrmions/blob/main/slides.pdf)
 
 ---
 
