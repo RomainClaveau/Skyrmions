@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <script type="text/javascript" src="js/core/main.js"></script>
+        <script type="text/javascript" src="js/core/render.js"></script>
+
+        <script type="text/javascript" src="js/modules/init.module.js"></script>
+        <script type="text/javascript" src="js/modules/configuration.module.js"></script>
+        <script type="text/javascript" src="js/modules/multithreading.module.js"></script>
+        <script type="text/javascript" src="js/modules/simulation.module.js"></script>
+        <script type="text/javascript" src="js/modules/studies.module.js"></script>
+
+
+        <script type="text/javascript" src="js/lib/threejs.min.js"></script>
+        <script type="text/javascript" src="js/lib/plotly.min.js"></script>
+
+        <script type="text/javascript" src="js/util/manipulation_array.js"></script>
+        <script type="text/javascript" src="js/util/navTabs.js"></script>
+
+        <link type="text/css" rel="stylesheet" href="css/interface.css" />
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300&display=swap" rel="stylesheet"> 
+    </head>
+    
+    <body>
+        <header>
+            <span id="title_3d" class="selected" onclick="javascript:showSectionTab('3d');">Visualisation 3D</span>
+            <span id="title_2d" onclick="javascript:showSectionTab('2d');">Visualisation 2D</span>
+            <span id="title_table" onclick="javascript:showSectionTab('table');">Tableau de valeurs</span>
+            <span id="title_study" onclick="javascript:showSectionTab('study');">Etude paramétrique</span>
+        </header>
+        <nav>
+            <div id="tabs_nav">
+                <span>
+                    <p id="title_physics" class="selected" onclick="javascript:showNavTab('physics');">Paramètres<br />physiques</p>
+                    <p id="title_global" class="" onclick="javascript:showNavTab('global');">Paramètres<br />globaux</p>
+                    <p id="title_animation" class="" onclick="javascript:showNavTab('animation');">Paramètres<br />d'animation</p>
+                    <p id="title_computed" class="" onclick="javascript:showNavTab('computed');">Paramètres<br />calculés</p>
+                </span>
+            </div>
+            <div id="tab_physics" class="tab show">
+                <table>
+                        <tr class="global_title"><td>Paramètres physique</td></tr>
+                        <tr class="title" id="title_dimension"><td>Dimensions du système</td></tr>
+                        <tr class="values" id="values_dimension"><td>
+                            <input type="text" value="15" />
+                            <span class="units">nm</span>
+                            <input type="text" value="15" />
+                            <span class="units">nm</span>
+                            <input type="text" value="1" />
+                            <span class="units">nm</span>
+                        </td></tr>
+                        
+                        <tr class="title" id="title_exch"><td>Interaction d'échange</td></tr>
+                        <tr class="values" id="values_exch"><td>
+                            <input type="text" value="10" onchange="atomistic.constants.physicalParameters.J = this.value * 1e-3;" />
+                            <span class="units">meV</span>
+                        </td></tr>
+                        
+                        <tr class="title" id="title_dmi"><td>Interaction de Dzyaloshinskii-Moriya</td></tr>
+                        <tr class="values" id="values_dmi"><td>
+                            <input type="text" value="8" onchange="atomistic.constants.physicalParameters.K = this.value * 1e-3;" />
+                            <span class="units">meV</span>
+                        </td></tr>
+                        
+                        <tr class="title" id="title_dd"><td>Interaction dipôle-dipôle</td></tr>
+                        <tr class="values" id="values_dd"><td>
+                            <input type="text" value="0" onchange="atomistic.constants.physicalParameters.L = this.value * 1e-3;" />
+                            <span class="units">meV</span>
+                        </td></tr>
+                        
+                        <tr class="title" id="title_zee"><td>Champ magnétique extérieur</td></tr>
+                        <tr class="values" id="values_zee"><td>
+                            <input type="text" value="1" onchange="atomistic.constants.physicalParameters.B = this.value;" />
+                            <span class="units">T</span>
+                        </td></tr>
+                        
+                        <tr class="title" id="title_noise"><td>Température</td></tr>
+                        <tr class="values" id="values_noise"><td>
+                            <input type="text" value="0" onchange="atomistic.constants.physicalParameters.D = this.value * 1e14;" />
+                            <span class="units">°K</span>
+                        </td></tr>
+                </table>
+            </div>
+
+            <div id="tab_global" class="tab hide">
+                <table>
+                    <tr class="global_title"><td>Paramètres globaux</td></tr>
+
+                    <tr class="title" id="title_dt"><td>Incrément temporel</td></tr>
+                    <tr class="values" id="values_dt"><td>
+                        <input type="text" value="10" onchange="atomistic.constants.physicalParameters.dt = this.value * 1e-15;" />
+                        <span class="units">fs</span>
+                    </td></tr>
+
+                    <tr class="title" id="title_tau"><td>Temps d'autocorrélation du bruit</td></tr>
+                    <tr class="values" id="values_tau"><td>
+                        <input type="text" value="10" onchange="atomistic.constants.physicalParameters.τ = this.value * 1e-15;" />
+                        <span class="units">fs</span>
+                    </td></tr>
+
+                    <tr class="title" id="title_alpha"><td>Facteur d'amortissement</td></tr>
+                    <tr class="values" id="values_alpha"><td>
+                        <input type="text" value="0" onchange="atomistic.constants.physicalParameters.α = this.value;" />
+                        <span class="units">/</span>
+                    </td></tr>
+
+                    <tr class="title" id="title_workers"><td>Nombre de processus alloués</td></tr>
+                    <tr class="values" id="values_workers"><td>
+                        <input type="text" value="4" onchange="atomistic.constants.multithreading.nbWorkers = this.value;" />
+                        <span class="units">/</span>
+                    </td></tr>
+                </table>
+            </div>
+
+            <div id="tab_animation" class="tab hide">
+                <table>
+                    <tr class="global_title"><td>Paramètres d'animation</td></tr>
+
+                    <tr class="title" id="title_live"><td>Visualisation en direct</td></tr>
+                    <tr class="values" id="values_live"><td>
+                        <input type="checkbox" value="10" onchange="atomistic.constants.renderer.live = this.checked;" />
+                    </td></tr>
+
+                    <tr class="title" id="title_quality"><td>Densité de pixel</td></tr>
+                    <tr class="values" id="values_quality"><td>
+                        <input type="text" value="1.5" onchange="atomistic.constants.renderer.quality = this.value; atomistic.constants.renderer.renderer.setPixelRatio( window.devicePixelRatio * atomistic.constants.renderer.quality );" />
+                        <span class="units">/</span>
+                    </td></tr>
+
+                    <tr class="title" id="title_steps"><td>Vitesse d'affichage</td></tr>
+                    <tr class="values" id="values_steps"><td>
+                        <input type="text" value="1" onchange="atomistic.constants.simulation.updateEveryStep = this.value" />
+                        <span class="units">pas</span>
+                    </td></tr>
+
+                    <tr class="title" id="title_nuances"><td>Nuances de la palette</td></tr>
+                    <tr class="values" id="values_nuances"><td>
+                        <input type="text" value="1000" onchange="atomistic.constants.renderer.nuances = this.value;create_palette();" />
+                        <span class="units">/</span>
+                    </td></tr>
+                </table>
+            </div>
+
+            <div id="tab_computed" class="tab hide">
+                    <table>
+                        <tr class="global_title"><td>Paramètres calculés</td></tr>
+
+                        <tr class="title" id="title_Q"><td>Charge topologique du système</td></tr>
+                        <tr class="values" id="values_Q"><td>
+                            <input type="text" value="0.0" readonly />
+                            <span class="units">/</span>
+                        </td></tr>
+
+                        <tr class="title" id="title_mean"><td>Composantes moyennes de l'aimantation</td></tr>
+                        <tr class="values" id="values_mean"><td>
+                            <input type="text" value="0.0" />
+                            <span class="units">Ms</span>
+                            <input type="text" value="0.0" />
+                            <span class="units">Ms</span>
+                            <input type="text" value="0.0" />
+                            <span class="units">Ms</span>
+                        </td></tr>
+
+                        <tr class="title" id="title_mean2"><td>Norme moyenne de l'aimantation</td></tr>
+                        <tr class="values" id="values_mean2"><td>
+                            <input type="text" value="0.0" />
+                            <span class="units">Ms</span>
+                        </td></tr>
+
+                        <tr class="title" id="title_mean3"><td>Composantes diagonales moyennes de la corrélation &lt;ω<sub>i</sub> s<sub>j</sub> &gt;</td></tr>
+                        <tr class="values" id="values_mean3"><td>
+                            <input type="text" value="0.0" />
+                            <span class="units">/</span>
+                            <input type="text" value="0.0" />
+                            <span class="units">/</span>
+                            <input type="text" value="0.0" />
+                            <span class="units">/</span>
+                        </td></tr>
+
+                        <tr class="title" id="title_mean4"><td>Composantes diagonales moyennes de la corrélation &lt;s<sub>i</sub> s<sub>j</sub> &gt;</td></tr>
+                        <tr class="values" id="values_mean4"><td>
+                            <input type="text" value="0.0" />
+                            <span class="units">/</span>
+                            <input type="text" value="0.0" />
+                            <span class="units">/</span>
+                            <input type="text" value="0.0" />
+                            <span class="units">/</span>
+                        </td></tr>
+                        
+                        <tr class="title" id="title_convergence"><td>Critère de convergence</td></tr>
+                        <tr class="values" id="values_convergence"><td>
+                            <input type="text" value="0.0" />
+                            <span class="units">/</span>
+                        </td></tr>
+                    </table>
+                </div>
+        </nav>
+        
+        <section>
+            <div class="sectionTab show" id="sectionTab_3d"></div>
+            <div class="sectionTab hide" id="sectionTab_2d">
+                <div id="graph_Q_B_T"></div>
+            </div>
+            <div class="sectionTab hide" id="sectionTab_table"></div>
+            <div class="sectionTab hide" id="sectionTab_study">
+                <div class="title_study"><span>Paramètres de l'étude</span></div>
+                <div class="content_study">
+                    <table>
+                        <tr><th>Effectuer une étude paramétrique ?</th></tr>
+                        <tr><td><input type="checkbox" value="false" /></td></tr>
+
+                        <tr><th>Dimension de l'étude</th></tr>
+                        <tr><td><input type="text" value="3" /><span class="units">/</span></td></tr>
+
+                        <tr><th>Composante en <i>x</i> de l'étude</th></tr>
+                        <tr><td><input type="text" value="D" /><span class="units">/</span> va de <input type="text" value="0" /><span class="units">/</span> à <input type="text" value="1" /><span class="units">/</span></td></tr>
+
+                        <tr><th>Composante en <i>y</i> de l'étude</th></tr>
+                        <tr><td><input type="text" value="B" /><span class="units">/</span></td></tr>
+
+                        <tr><th>Composante en <i>z</i> de l'étude</th></tr>
+                        <tr><td><input type="text" value="Q" /><span class="units">/</span></td></tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <div id="chronology">
+            <span><b>0</b> images calculées<br /><input type="range" min="0" max="0" step="1" oninput="javascript:atomistic.simulation.viewChronology(this.value);" /><br /><b>Pas d'image sélectionnée</b></span>
+        </div>
+        
+        <footer>
+            <span class="progress"></span>
+            <span class="start_simu"><input type="button" value="Commencer la simulation" onclick="javascript:atomistic.simulation.simulate()" /></span>
+            <span class="stop_simu"><input type="button" value="Mettre en pause la simulation" onclick="javascript:atomistic.simulation.update_pause()" /></span>
+            <span class="state" id="state"></span>
+        </footer>
+        
+        <script type="text/javascript">
+            window.onload = function()
+            {
+                // On met à jour l'interface en fonction des paramètres pré-définis
+                atomistic.simulation.update_interface();
+                
+                // Création de la grille
+                create_grid(atomistic.constants.system.dx, atomistic.constants.system.dy, atomistic.constants.system.dz);
+            }
+        </script>
+    </body>
+</html>

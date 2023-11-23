@@ -1,0 +1,525 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-size: 0.98em;
+}
+
+body
+{
+    background-color: black;
+    overflow: hidden;
+    font-family: 'Raleway', sans-serif;
+}
+
+header
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 10%;
+
+    display: table;
+
+    color: white;
+
+    font-size: 1.2em;
+}
+
+header span
+{
+    display: table-cell;
+    vertical-align: middle;
+
+    text-align: center;
+
+    background: rgb(80, 80, 80);
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    width: calc(70vw / 3);
+}
+header span.selected
+{
+    background: black;
+}
+header span:hover
+{
+    background: rgb(255, 122, 122);
+    color: black;
+}
+
+section
+{
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 70%;
+    height: 65%;
+    
+    transition: all 0.3s ease;
+}
+
+section .sectionTab
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+section .sectionTab.show
+{
+    display: block;
+}
+
+section .sectionTab.hide
+{
+    display: none;
+}
+
+section #sectionTab_2d #graph_Q_B_T
+{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    
+    background: white;
+    
+    border-radius: 5px;
+}
+
+
+section #sectionTab_study .title_study
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25%;
+
+    display: table;
+
+    color: white;
+    font-size: 2em;
+}
+
+section #sectionTab_study .title_study span
+{
+    display: table-cell;
+    vertical-align: middle;
+
+    text-align: center;
+}
+
+section #sectionTab_study .content_study
+{
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    width: 90%;
+    height: 65%;
+
+    background: white;
+    border-radius: 5px;
+}
+
+section #sectionTab_study .content_study table
+{
+    position: absolute;
+    top: 0;
+    left: 25%;
+    width: 50%;
+    max-height: 100%;
+}
+
+section #sectionTab_study .content_study table th
+{
+    text-align: left;
+
+    height: 4vh;
+    padding-left: 5%;
+}
+
+section #sectionTab_study .content_study table td
+{
+    text-align: right;
+
+    height: 5vh;
+    padding-right: 5%;
+}
+
+section #sectionTab_study .content_study table td:not(last-child)
+{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#chronology
+{
+    position: absolute;
+    top: 75%;
+    left: 0;
+    width: 70%;
+    height: 15%;
+
+    background: black;
+
+    display: table;
+}
+
+#chronology span
+{
+    display: table-cell;
+    vertical-align: middle;
+
+    text-align: center;
+
+    font-size: 1em;
+    color: white;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 70%;
+    background: transparent;
+  }
+  input[type=range]:focus {
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: #3071a9;
+    border-radius: 1.3px;
+    border: 0.2px solid white;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    border: 1px solid white;
+    height: 36px;
+    width: 16px;
+    border-radius: 1px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -14px;
+  }
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #367ebd;
+  }
+  input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: #3071a9;
+    border-radius: 1.3px;
+    border: 0.2px solid white;
+  }
+  input[type=range]::-moz-range-thumb {
+    border: 1px solid white;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  input[type=range]::-ms-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+  }
+  input[type=range]::-ms-fill-lower {
+    background: #2a6495;
+    border: 0.2px solid white;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px white, 0px 0px 1px white;
+  }
+  input[type=range]::-ms-fill-upper {
+    background: #3071a9;
+    border: 0.2px solid white;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px white, 0px 0px 1px white;
+  }
+  input[type=range]::-ms-thumb {
+    box-shadow: 1px 1px 1px white, 0px 0px 1px white;
+    border: 1px solid white;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  input[type=range]:focus::-ms-fill-lower {
+    background: #3071a9;
+  }
+  input[type=range]:focus::-ms-fill-upper {
+    background: #367ebd;
+  }
+
+footer
+{
+    position: absolute;
+    top: 90%;
+    left: 0;
+    width: 70%;
+    height: 10%;
+    
+    background: black;
+    
+    display: table;
+    
+    z-index: 99;
+    
+    color: white;
+}
+
+footer span
+{
+    display: table-cell;
+    vertical-align: middle;
+    
+    text-align: center;
+}
+
+.start_simu
+{
+    width: 20vw;
+}
+
+.start_simu input
+{
+    border: 5px solid white;
+    color: white;
+    height: 6vh;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 18vw;
+    
+    background: transparent;
+    
+    transition: all 0.3s ease;
+}
+.start_simu input:hover
+{
+    background: white;
+    color: black;
+}
+
+.stop_simu
+{
+    width: 20vw;
+}
+
+.stop_simu input
+{
+    border: 5px solid red;
+    color: red;
+    height: 6vh;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 18vw;
+    
+    background: transparent;
+    
+    transition: all 0.3s ease;
+}
+.stop_simu input:hover
+{
+    background: red;
+    color: white;
+}
+
+.progress
+{
+    width: 20vw;
+}
+
+.progress progress
+{
+    padding: 1.5vh;
+    
+    border: none;
+    border-radius: 5px;
+    
+    background: transparent;
+    
+    width: 18vw;
+}
+
+.state
+{
+    width: 20vw;
+}
+
+nav
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+
+    background: #dbdbdb;
+    
+    z-index: 100;
+    
+    overflow: auto;
+}
+
+nav #tabs_nav
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+
+    background: #01afff;
+
+    display: table;
+}
+
+nav #tabs_nav span
+{
+    display: table-row;
+}
+
+
+nav #tabs_nav span p
+{
+    display: table-cell;
+    vertical-align: middle;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    width: calc(25vw / 4);
+
+    transition: all 0.3s ease;
+
+    font-size: 1.2em;
+}
+nav #tabs_nav span p.selected
+{
+    background: #dbdbdb;
+}
+nav #tabs_nav span p:hover
+{
+    background: rgb(255, 122, 122);
+}
+
+nav .tab
+{
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 90%;
+}
+
+nav .tab.show
+{
+    display: block;
+}
+
+nav .tab.hide
+{
+    display: none;
+}
+
+nav .tab table
+{
+    position: absolute;
+    top: 0;
+    left: 2%;
+    width: 96%;
+    max-height: 100%;
+    
+    border-collapse: collapse;
+    
+    padding: 1vw;
+    
+    background: #eaeaea;
+    
+    border-radius: 5px;
+}
+
+nav table .global_title
+{
+    font-size: 1.5em;
+    text-align: center;
+    
+    background: #dbdbdb;
+}
+
+nav table .global_title td
+{
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+nav table tr
+{
+    height: 4vh;
+    
+    border-radius: 5px;
+}
+
+nav table tr td
+{
+    padding: 0.5vw;
+    
+    border-radius: 5px;
+}
+
+.title
+{
+    text-align: left;
+    
+    font-size: 1.2em;
+}
+
+.values
+{
+    text-align: right;
+}
+
+input[type="text"]
+{
+    border: 1px solid #d6d6d6;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 2.8vw;
+    padding: 1vh;
+    
+    margin-left: 1vw;
+}
+
+span.units
+{
+    display: inline-block;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 1vh;
+    width: 2.2vw;
+    text-align: center;
+    background: #d6d6d6;
+    border: 1px solid #d6d6d6;
+
+    margin-left: -5px;
+}
